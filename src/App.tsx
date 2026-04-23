@@ -290,7 +290,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="mt-12 border-t border-slate-800 pt-8 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-end gap-6 pb-8">
         <div className="flex-1">
-          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-black mb-4">RTMA-KTU CSE Department</p>
+          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-black mb-4">RTM AKTU CSE Department</p>
           <div className="flex flex-wrap gap-6 text-[10px] text-slate-500 font-medium">
              Year 4 Semester 2 Batch · HSC Program · Spring 2026 Academic Session
           </div>
