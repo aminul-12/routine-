@@ -319,7 +319,7 @@ export default function App() {
           </div>
           <div className="flex flex-col items-end">
             <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-700">System Updated: 15.03.2026</p>
-            <p className="text-[8px] text-slate-800 mt-1 uppercase font-bold tracking-widest">Build 4.2.1-CSE · RTM Al-Kabir</p>
+            <p className="text-[8px] text-slate-800 mt-1 uppercase font-bold tracking-widest">Build Aminul-4.2.1-CSE · RTM Al-Kabir</p>
           </div>
         </div>
       </footer>
