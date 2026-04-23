@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
@@ -98,11 +93,13 @@ const schedule = [
     accent: "text-purple-500",
     badge: "bg-purple-500",
     border: "border-purple-500",
-    source: "Special Session Day",
+    source: "Main Session Day",
     classes: [
-      { period:"1st–2nd", time:"10:00 AM", code:"CSE 3203", title:"Computer Graphics",              teacher:"RIH", room:"304", src:"EVE" },
-      { period:"1st–2nd", time:"10:00 AM", code:"CSE 4101", title:"Computer Networks",              teacher:"MSA", room:"305", src:"DAY" },
-      { period:"3rd–4th", time:"2:00 PM",  code:"CSE 4103", title:"Microprocessors & Microcontrollers", teacher:"AR", room:"305", src:"DAY" },
+      { period:"1st", time:"10:00 PM", code:"CSE 3203", title:"Computer Graphics",              teacher:"RIH", room:"304", src:"EVE" },
+      { period:"2nd", time:"02:00 PM", code:"CSE 4101", title:"Computer Networks",              teacher:"MSA", room:"305", src:"DAY" },
+      { period:"3rd", time:"03:00 PM", code:"CSE 4101", title:"Computer Networks",              teacher:"MSA", room:"305", src:"DAY" },
+      { period:"4th", time:"05:00 PM", code:"CSE 4103", title:"Microprocessors & Microcontrollers", teacher:"AR",  room:"305", src:"DAY" },
+      { period:"5th", time:"06:00 PM", code:"CSE 4103", title:"Microprocessors & Microcontrollers", teacher:"AR",  room:"305", src:"DAY" },
     ],
   },
 ];
