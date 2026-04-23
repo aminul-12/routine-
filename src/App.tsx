@@ -26,8 +26,8 @@ const allCourses = [
   { sl: 4,  code: "CSE 4122", title: "CV & Image Processing: Sessional",          type: "sessional",status: "scheduled" },
   { sl: 5,  code: "CSE 4103", title: "Microprocessors & Microcontrollers",        type: "theory",   status: "scheduled" },
   { sl: 6,  code: "CSE 4123", title: "Microprocessors: Sessional",                type: "sessional",status: "scheduled" },
-  { sl: 7,  code: "CSE 4224", title: "Placement / Practicum / Internship",        type: "special",  status: "confirm"   },
-  { sl: 8,  code: "CSE 4225", title: "Thesis / Project",                          type: "special",  status: "confirm"   },
+  { sl: 7,  code: "CSE 4224", title: "Placement / Practicum / Internship",        type: "special",  status: "pending"   },
+  { sl: 8,  code: "CSE 4225", title: "Thesis / Project",                          type: "special",  status: "pending"   },
   { sl: 9,  code: "CSE 3203", title: "Computer Graphics",                         type: "theory",   status: "scheduled" },
   { sl: 10, code: "CSE 3223", title: "Computer Graphics: Sessional",              type: "sessional",status: "scheduled" },
   { sl: 11, code: "CSE 2203", title: "Simulation and Modeling",                   type: "theory",   status: "scheduled" },
@@ -165,7 +165,6 @@ export default function App() {
           {[
             { id: "schedule", label: "Schedule", icon: Calendar },
             { id: "courses", label: "Courses", icon: BookOpen },
-            { id: "teachers", label: "Teachers", icon: Users },
           ].map((t) => {
             const isActive = tab === t.id;
             const Icon = t.icon;
@@ -250,44 +249,39 @@ export default function App() {
               exit={{ opacity: 0 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             >
-              {allCourses.map((c) => (
-                <div key={c.code} className="bg-slate-900/40 border border-slate-800 rounded-xl p-4 flex items-center justify-between group hover:border-slate-700 transition-all">
-                  <div className="flex items-center gap-4">
-                    <div className="w-8 h-8 rounded bg-slate-800 flex items-center justify-center text-[10px] font-black text-slate-500 group-hover:text-blue-500 transition-colors">
-                      {String(c.sl).padStart(2, '0')}
+              {allCourses.map((c) => {
+                const isPending = c.status === 'pending';
+                return (
+                  <div key={c.code} className={`bg-slate-900/40 border ${isPending ? 'border-amber-500/20 bg-amber-500/5' : 'border-slate-800'} rounded-xl p-4 flex items-center justify-between group hover:border-slate-700 transition-all relative overflow-hidden`}>
+                    <div className="flex items-center gap-4">
+                      <div className={`w-8 h-8 rounded bg-slate-800 flex items-center justify-center text-[10px] font-black ${isPending ? 'text-amber-500' : 'text-slate-500'} group-hover:text-blue-500 transition-colors`}>
+                        {String(c.sl).padStart(2, '0')}
+                      </div>
+                      <div>
+                        <h3 className="text-xs font-black uppercase text-slate-200 tracking-wider mb-1">{c.code}</h3>
+                        <p className="text-[11px] text-slate-400 font-medium leading-tight">{c.title}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-xs font-black uppercase text-slate-200 tracking-wider mb-1">{c.code}</h3>
-                      <p className="text-[11px] text-slate-400 font-medium leading-tight">{c.title}</p>
+                    <div className="flex flex-col items-end gap-1">
+                      {isPending ? (
+                        <div className="group/tip relative flex justify-end">
+                          <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest text-amber-500 bg-amber-500/10 px-2 py-1 rounded border border-amber-500/20 cursor-help">
+                            <AlertCircle size={10} /> Pending
+                          </div>
+                          <div className="absolute bottom-full mb-2 w-48 p-2 bg-slate-950 border border-amber-500/30 rounded-lg text-[9px] text-amber-200/80 leading-relaxed shadow-2xl opacity-0 scale-95 group-hover/tip:opacity-100 group-hover/tip:scale-100 transition-all duration-200 pointer-events-none z-50">
+                            <div className="font-bold border-b border-amber-500/20 pb-1 mb-1">Confirmation Required</div>
+                            Confirmation is required from the department office for this session.
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest text-emerald-500">
+                          <CheckCircle2 size={10} /> Found
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <div className={`text-[9px] font-black uppercase tracking-widest ${c.status === 'scheduled' ? 'text-emerald-500' : 'text-rose-500 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20'}`}>
-                    {c.status === 'scheduled' ? '✓ Found' : 'PENDING'}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          )}
-
-          {tab === "teachers" && (
-            <motion.div
-              key="teachers"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            >
-              {Object.entries(teachers).map(([code, t]) => (
-                <div key={code} className={`flex items-center gap-4 bg-slate-900/40 border border-${t.color}-500/20 p-5 rounded-2xl`}>
-                  <div className={`w-12 h-12 rounded-lg bg-${t.color}-500/20 border border-${t.color}-500/40 flex items-center justify-center text-${t.color}-500 font-black text-lg italic tracking-tight`}>
-                    {code}
-                  </div>
-                  <div>
-                    <p className="text-slate-100 font-black text-sm uppercase tracking-tight">{t.name}</p>
-                    <p className="text-[10px] text-slate-500 font-mono mt-1 font-bold">📞 {t.phone}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </motion.div>
           )}
         </AnimatePresence>
@@ -296,30 +290,16 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="mt-12 border-t border-slate-800 pt-8 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-end gap-6 pb-8">
         <div className="flex-1">
-          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-black mb-4">Instructor details </p>
-          <div className="flex flex-wrap gap-6">
-            {Object.entries(teachers).slice(0, 3).map(([code, t]) => (
-              <div key={code} className="flex items-center gap-3">
-                <div className={`w-8 h-8 rounded bg-${t.color}-500/20 border border-${t.color}-500/40 flex items-center justify-center text-${t.color}-500 font-bold text-xs`}>{code}</div>
-                <div className="text-[10px]">
-                  <p className="text-slate-200 font-bold">{t.name}</p>
-                  <p className="text-slate-500 font-mono">{t.phone}</p>
-                </div>
-              </div>
-            ))}
+          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-black mb-4">RTMA-KTU CSE Department</p>
+          <div className="flex flex-wrap gap-6 text-[10px] text-slate-500 font-medium">
+             Year 4 Semester 2 Batch · HSC Program · Spring 2026 Academic Session
           </div>
         </div>
 
         <div className="flex flex-col items-end gap-3 w-full md:w-auto">
-          <div className="bg-rose-950/20 border border-rose-900/30 p-4 rounded-xl w-full max-w-xs group hover:bg-rose-950/30 transition-all">
-            <div className="flex items-center gap-2 mb-2 text-rose-500 font-black text-[10px] uppercase tracking-tighter">
-              <AlertCircle size={14} /> Updated on: 15.03.2026 updated with Dept:
-            </div>
-            <p className="text-[10px] text-slate-400 font-medium italic">CSE 4224 · CSE 4225 (Thesis / Internship)</p>
-          </div>
           <div className="flex flex-col items-end">
-            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-700">System all right reserved</p>
-            <p className="text-[8px] text-slate-800 mt-1 uppercase font-bold tracking-widest">Build Aminul-4.2.1-CSE · RTM Al-Kabir</p>
+            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-700">System Updated: 15.03.2026</p>
+            <p className="text-[8px] text-slate-800 mt-1 uppercase font-bold tracking-widest">Built by Aminul · RTM Al-Kabir</p>
           </div>
         </div>
       </footer>
