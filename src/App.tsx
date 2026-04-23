@@ -296,7 +296,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="mt-12 border-t border-slate-800 pt-8 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-end gap-6 pb-8">
         <div className="flex-1">
-          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-black mb-4">Instructor Sync Directory</p>
+          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-black mb-4">Instructor details </p>
           <div className="flex flex-wrap gap-6">
             {Object.entries(teachers).slice(0, 3).map(([code, t]) => (
               <div key={code} className="flex items-center gap-3">
@@ -313,12 +313,12 @@ export default function App() {
         <div className="flex flex-col items-end gap-3 w-full md:w-auto">
           <div className="bg-rose-950/20 border border-rose-900/30 p-4 rounded-xl w-full max-w-xs group hover:bg-rose-950/30 transition-all">
             <div className="flex items-center gap-2 mb-2 text-rose-500 font-black text-[10px] uppercase tracking-tighter">
-              <AlertCircle size={14} /> Confirm with Dept:
+              <AlertCircle size={14} /> Updated on: 15.03.2026 updated with Dept:
             </div>
             <p className="text-[10px] text-slate-400 font-medium italic">CSE 4224 · CSE 4225 (Thesis / Internship)</p>
           </div>
           <div className="flex flex-col items-end">
-            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-700">System Updated: 15.03.2026</p>
+            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-700">System all right reserved</p>
             <p className="text-[8px] text-slate-800 mt-1 uppercase font-bold tracking-widest">Build Aminul-4.2.1-CSE · RTM Al-Kabir</p>
           </div>
         </div>
