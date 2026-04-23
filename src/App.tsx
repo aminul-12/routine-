@@ -220,11 +220,13 @@ export default function App() {
                           transition={{ delay: idx * 0.1 }}
                           className={`${dayData.bg} border border-${dayData.color}-500/20 rounded-xl p-3 flex flex-col gap-3 group hover:border-${dayData.color}-500/40 transition-colors`}
                         >
-                          <div className="flex justify-between items-start">
+                          <div className="flex justify-between items-center">
                             <span className={`text-[10px] font-black ${dayData.badge} text-black px-2 py-0.5 rounded shadow-sm`}>
                               {cls.time}
                             </span>
-                            <span className={`text-[10px] ${dayData.accent} font-mono font-bold tracking-tight opacity-70`}>Rm {cls.room}</span>
+                            <div className={`flex items-center gap-1 text-[10px] ${dayData.accent} font-mono font-black bg-slate-900/50 px-1.5 py-0.5 rounded border border-current/20`}>
+                              <MapPin size={10} /> {cls.room}
+                            </div>
                           </div>
                           <div>
                             <p className="text-[11px] font-bold text-white leading-tight group-hover:text-blue-400 transition-colors">{cls.code}: {cls.title}</p>
@@ -274,8 +276,8 @@ export default function App() {
                           </div>
                         </div>
                       ) : (
-                        <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest text-emerald-500">
-                          <CheckCircle2 size={10} /> Found
+                        <div className={`flex items-center gap-1 text-[9px] font-black uppercase tracking-widest ${['CSE 4101', 'CSE 4121', 'CSE 4103', 'CSE 4123'].includes(c.code) ? 'text-blue-500' : 'text-emerald-500'}`}>
+                          <CheckCircle2 size={10} /> {['CSE 4101', 'CSE 4121', 'CSE 4103', 'CSE 4123'].includes(c.code) ? 'Extra' : 'In This Semester'}
                         </div>
                       )}
                     </div>
